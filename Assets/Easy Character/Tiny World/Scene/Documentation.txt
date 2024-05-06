@@ -1,0 +1,14 @@
+# How to use - Easy Character Editor
+------------------------------------------
+0. Recommended game resolution 1920x1080
+
+1. Play Scene.
+
+2. Manipulate the controller window to decorate your character.
+
+3. Enter the name of the character you want to save.
+
+4. Click the Save button.
+
+5. Your character will be saved as Prefab in the path below.
+>> (Assets/Easy Character/Tiny World/Save Character/)
