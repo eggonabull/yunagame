@@ -32,6 +32,6 @@ public class IntroAnimation : MonoBehaviour
         }
 
         // scroll the text up the screen
-        _text.transform.position += new Vector3(0, 0.1f, 0);
+        _text.transform.position += new Vector3(0, 0.01f, 0);
     }
 }
