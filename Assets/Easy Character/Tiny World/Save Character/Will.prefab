@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8778328951296605930}
   - component: {fileID: 3626594814002064161}
-  - component: {fileID: 4538648942804866289}
   - component: {fileID: 4347156541043852191}
   m_Layer: 0
   m_Name: Will
@@ -61,19 +60,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &4538648942804866289
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 12303236717125369}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe3f501f64d114eccb845cd5b2c7f3e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CharacterAnimator: {fileID: 3626594814002064161}
 --- !u!114 &4347156541043852191
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1751,7 +1737,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_CategoryHash: 9.723703e-31
-  m_labelHash: 1.2985474e-36
+  m_labelHash: 4.8593897e-31
   m_SpriteKey: 0.0000056281424
   m_SpriteHash: 358585722
 --- !u!1 &2671692259008472117
@@ -1852,7 +1838,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_CategoryHash: 0.024146153
-  m_labelHash: 1.2985474e-36
+  m_labelHash: 0.000000084799865
   m_SpriteKey: 3.6437906e-32
   m_SpriteHash: 995608262
 --- !u!1 &2845005553168826197
@@ -1953,7 +1939,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_CategoryHash: 1.5718032e-34
-  m_labelHash: 1.2985474e-36
+  m_labelHash: 8.840178e-23
   m_SpriteKey: 2.3891736e-30
   m_SpriteHash: 390628488
 --- !u!1 &3373967516291897984
@@ -2054,7 +2040,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_CategoryHash: 9.723703e-31
-  m_labelHash: 1.2985474e-36
+  m_labelHash: 4.8593897e-31
   m_SpriteKey: 0.0000056281424
   m_SpriteHash: 358585722
 --- !u!1 &3730674055090555095
@@ -2352,7 +2338,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_CategoryHash: 0.0047193225
-  m_labelHash: 1.2985474e-36
+  m_labelHash: 7.4927845e-19
   m_SpriteKey: 1.2050484e-12
   m_SpriteHash: 180053673
 --- !u!1 &7359944659929418728
@@ -2454,7 +2440,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_CategoryHash: 1.5718032e-34
-  m_labelHash: 1.2985474e-36
+  m_labelHash: 8.840178e-23
   m_SpriteKey: 2.3891736e-30
   m_SpriteHash: 390628488
 --- !u!1 &8841595326645814549

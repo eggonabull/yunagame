@@ -2,22 +2,44 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
-using UnityEditor.Rendering;
 using UnityEngine;
+using SuperTiled2Unity;
 
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private Animator _animator;
     [SerializeField] private Camera _cam;
-    [SerializeField] private Rigidbody2D _rb;
-    [SerializeField] private Canvas _bg_canvas;
+    [SerializeField] private Rigidbody2D characterBody;
+    [SerializeField] private SuperMap background;
 
     private float _acceleration = 4.0f;
-    private float _deceleration = 8.0f;
-    private float _maxSpeed = 2.0f;
+    private float _deceleration = 12.0f;
+    private float _maxSpeed = 50.0f;
     private Vector2 _input = Vector2.zero;
     private Vector2 _speed = Vector2.zero;
     private bool isAttacking = false;
+
+    private int health = 100;
+
+    float minX;
+    float maxX;
+    float minY;
+    float maxY;
+
+    void Awake()
+    {
+        // Get the bounds of the background map
+        float buffer = 0.1f;
+        float backgroundHeight = background.m_Height * background.transform.localScale.y * background.GetComponentInChildren<Grid>().cellSize.y;
+        float backgroundWidth = background.m_Width * background.transform.localScale.x * background.GetComponentInChildren<Grid>().cellSize.x;
+        float cam_width = _cam.orthographicSize * _cam.aspect;
+        _animator.SetBool("Walk", false);
+        minX = background.transform.position.x + cam_width + buffer;
+        maxX = background.transform.position.x + backgroundWidth - cam_width - buffer;
+        minY = background.transform.position.y - backgroundHeight + _cam.orthographicSize + buffer;
+        maxY = background.transform.position.y - _cam.orthographicSize - buffer;
+        _cam.transform.position = new Vector3(characterBody.position.x, characterBody.position.y, _cam.transform.position.z);
+    }
 
     void GatherInput()
     {
@@ -27,63 +49,112 @@ public class PlayerController : MonoBehaviour
         _input = new Vector2(horizontal, vertical);
     }
 
-    void Update() {
+    void Update()
+    {
         GatherInput();
+
+        //characterBody.position += _speed * Time.fixedDeltaTime;
+        float clampedX = Mathf.Clamp(characterBody.position.x, minX, maxX);
+        float clampedY = Mathf.Clamp(characterBody.position.y, minY, maxY);
+        Vector3 clampedPosition = new Vector3(clampedX, clampedY, _cam.transform.position.z);
+        _cam.transform.position = clampedPosition;
+        //_cam.transform.position = Vector3.MoveTowards(_cam.transform.position, clampedPosition, 1f);
     }
 
-    void FixedUpdate() {
+    void FixedUpdate()
+    {
         Move();
     }
 
-    void LateUpdate() {
-        if (_input.x < 0) {
+    void LateUpdate()
+    {
+        if (health <= 0)
+        {
+            return;
+        }
+
+        if (_input.x < 0)
+        {
             _animator.transform.localScale = new Vector3(1, 1, 1);
-        } else if (_input.x > 0) {
+        }
+        else if (_input.x > 0)
+        {
             _animator.transform.localScale = new Vector3(-1, 1, 1);
         }
-        if (_speed.magnitude > 0.15) {
+        // print("Walk " + _animator.GetBool("Walk"));
+        if (_speed.magnitude > 0.15 && !_animator.GetBool("Walk"))
+        {
             _animator.SetBool("Walk", true);
-        } else {
+        }
+        else if (_speed.magnitude <= 0.15 && _animator.GetBool("Walk"))
+        {
             _animator.SetBool("Walk", false);
         }
-        if (isAttacking) {
+        if (isAttacking)
+        {
             _animator.SetTrigger("Attack");
-        } else {
-            _animator.ResetTrigger("Attack");    
+
+            // get if there are any trees in the attack range
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(characterBody.position, 6.0f);
+            print("caharacterBody.position " + characterBody.position);
+            print("colliders " + colliders.Length);
+            foreach (Collider2D collider in colliders)
+            {
+                print("collider " + collider.gameObject.tag);
+                if (collider.gameObject.tag == "Tree")
+                {
+                    TreeScript tree = collider.gameObject.GetComponent<TreeScript>();
+                    tree.GetAttacked();
+                }
+            }
+        }
+        else
+        {
+            _animator.ResetTrigger("Attack");
         }
     }
 
-    void Move() {
-        if (_input.x == 0) {
+    public void TakeDamage(Vector2 velocity, int damage)
+    {
+        _speed = _speed + velocity * 2f;
+        _animator.SetTrigger("Hit");
+        print("TakeDamage " + damage);
+        health -= 35;
+        if (health <= 0)
+        {
+            _animator.SetBool("Walk", false);
+            _animator.SetBool("Death", true);
+        }
+    }
+
+    void Move()
+    {
+        if (health <= 0)
+        {
+            return;
+        }
+
+        if (_input.x == 0)
+        {
             _speed.x = Mathf.Lerp(_speed.x, 0, _deceleration * Time.fixedDeltaTime);
-        } else {
+        }
+        else
+        {
             _speed.x = Mathf.Lerp(_speed.x, _input.x * _maxSpeed, _acceleration * Time.fixedDeltaTime);
         }
-        if (_input.y == 0) {
+        if (_input.y == 0)
+        {
             _speed.y = Mathf.Lerp(_speed.y, 0, _deceleration * Time.fixedDeltaTime);
-        } else {
+        }
+        else
+        {
             _speed.y = Mathf.Lerp(_speed.y, _input.y * _maxSpeed, _acceleration * Time.fixedDeltaTime);
         }
-        _rb.position = _rb.position + _speed;
-        
-        // The bg exists in the world, move the camera with the player, but clamp
-        // the camera to the bg_canvas factoring in the camera's field of view
-        // and the aspect ratio of the screen and the bg_canvas's distance
-        // from the camera.
-        float buffer = 0.1f;
-        float backgroundHeight = _bg_canvas.GetComponent<RectTransform>().rect.height;
-        float backgroundWidth = _bg_canvas.GetComponent<RectTransform>().rect.width;
-        float minX = _bg_canvas.transform.position.x - (backgroundWidth / 2) + (_cam.orthographicSize * _cam.aspect) - buffer;
-        float maxX = _bg_canvas.transform.position.x + (backgroundWidth / 2) - (_cam.orthographicSize * _cam.aspect) + buffer;
-        float minY = _bg_canvas.transform.position.y - (backgroundHeight / 2) + (_cam.orthographicSize) - buffer;
-        float maxY = _bg_canvas.transform.position.y + (backgroundHeight / 2) - (_cam.orthographicSize) + buffer;
-        print(minX + " " + maxX + " " + minY + " " + maxY);
-        print(_rb.position.x + " " + _rb.position.y);
-        print(_cam.transform.position.x + " " + _cam.transform.position.y);
 
-        float clampedX = Mathf.Clamp(_rb.position.x, minX, maxX);
-        float clampedY = Mathf.Clamp(_rb.position.y, minY, maxY);
-        _cam.transform.position = new Vector3(clampedX, clampedY, _cam.transform.position.z);
-        
+
+        _speed = Vector2.ClampMagnitude(_speed, _maxSpeed);
+        characterBody.velocity = _speed;
+
+
     }
 }

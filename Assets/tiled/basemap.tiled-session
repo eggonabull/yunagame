@@ -1,0 +1,69 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "basemap.tmx",
+    "expandedProjectPaths": [
+        "."
+    ],
+    "fileStates": {
+        ":/automap-tiles.tsx": {
+            "scaleInDock": 3
+        },
+        "Grass.tsx": {
+            "scaleInDock": 3,
+            "scaleInEditor": 7.1441
+        },
+        "Hills.tsx": {
+            "scaleInDock": 3.3504,
+            "scaleInEditor": 1
+        },
+        "Water.tsx": {
+            "scaleInDock": 7.8968,
+            "scaleInEditor": 1
+        },
+        "basemap.tmx": {
+            "scale": 2.3554,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 240.29888766239281,
+                "y": 138.61764456143328
+            }
+        },
+        "bigmap.tmx": {
+            "scale": 1.7711,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 326.915476257693,
+                "y": 615.1544238044153
+            }
+        }
+    },
+    "last.externalTilesetPath": "/home/drew/Downloads/Sprout Lands - Sprites - Basic pack/Tilesets",
+    "last.imagePath": "/home/drew/Downloads/Sprout Lands - Sprites - Basic pack/Tilesets",
+    "map.height": 300,
+    "map.lastUsedFormat": "tmx",
+    "map.tileHeight": 16,
+    "map.tileWidth": 16,
+    "map.width": 400,
+    "openFiles": [
+        "basemap.tmx",
+        "Grass.tsx",
+        "Hills.tsx",
+        "Water.tsx"
+    ],
+    "project": "basemap.tiled-project",
+    "recentFiles": [
+        "Water.tsx",
+        "Hills.tsx",
+        "Grass.tsx",
+        "basemap.tmx"
+    ],
+    "tileset.lastUsedFilter": "All Files (*)",
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 16,
+        "width": 16
+    }
+}
