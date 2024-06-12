@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "com.seanba.super-tiled2unity": "file:/home/drew/Downloads/super-tiled2unity.v2.1.1",
     "com.unity.2d.animation": "9.1.1",
     "com.unity.textmeshpro": "3.0.9",
     "com.unity.toolchain.linux-x86_64": "2.0.9",
