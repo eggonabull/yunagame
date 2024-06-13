@@ -54,10 +54,7 @@ public class PlayerController : MonoBehaviour
         GatherInput();
 
         //characterBody.position += _speed * Time.fixedDeltaTime;
-        float clampedX = Mathf.Clamp(characterBody.position.x, minX, maxX);
-        float clampedY = Mathf.Clamp(characterBody.position.y, minY, maxY);
-        Vector3 clampedPosition = new Vector3(clampedX, clampedY, _cam.transform.position.z);
-        _cam.transform.position = clampedPosition;
+        
         //_cam.transform.position = Vector3.MoveTowards(_cam.transform.position, clampedPosition, 1f);
     }
 
@@ -153,8 +150,12 @@ public class PlayerController : MonoBehaviour
 
 
         _speed = Vector2.ClampMagnitude(_speed, _maxSpeed);
-        characterBody.velocity = _speed;
+        // characterBody.velocity = _speed;
+        characterBody.position += _speed * Time.fixedDeltaTime;
 
-
+        float clampedX = Mathf.Clamp(characterBody.position.x, minX, maxX);
+        float clampedY = Mathf.Clamp(characterBody.position.y, minY, maxY);
+        Vector3 clampedPosition = new Vector3(clampedX, clampedY, _cam.transform.position.z);
+        _cam.transform.position = clampedPosition;
     }
 }
