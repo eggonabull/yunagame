@@ -76,7 +76,7 @@ public class GhostScript : MonoBehaviour
         collider.enabled = false;
         print("Disappeared");
         animator.ResetTrigger("Disappear");
-        if (health == 0)
+        if (health <= 0)
         {
             Destroy(gameObject);
         }
