@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Tree
+  - Glacier
+  - Ghost
   layers:
   - Default
   - TransparentFX
@@ -44,4 +46,7 @@ TagManager:
     locked: 0
   - name: UI Overlay
     uniqueID: 2425651459
+    locked: 0
+  - name: New Layer 2
+    uniqueID: 2306653633
     locked: 0

@@ -4,19 +4,26 @@ using UnityEngine;
 
 public class TreeScript : MonoBehaviour
 {
-    public Animator animator;
+    Animator _animator;
     int health = 3;
+    [SerializeField] public EarthHealth earthHealth;
+
+    public void Start()
+    {
+        _animator = GetComponent<Animator>();
+
+        earthHealth.IncreaseHealth(1);
+    }
 
     // Start is called before the first frame update
     public void GetAttacked()
     {
         health -= 1;
-        animator.SetInteger("Health", health);
-    }
+        _animator.SetInteger("Health", health);
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (health <= 0)
+        {
+            earthHealth.DecreaseHealth(1);
+        }
     }
 }

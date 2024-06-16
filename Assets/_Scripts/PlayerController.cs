@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
 using SuperTiled2Unity;
+using UnityEngine.U2D.Animation;
 
 public class PlayerController : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Rigidbody2D characterBody;
     [SerializeField] private SuperMap background;
 
-    private float _acceleration = 4.0f;
+    private float _acceleration = 8.0f;
     private float _deceleration = 12.0f;
     private float _maxSpeed = 50.0f;
     private Vector2 _input = Vector2.zero;
@@ -92,7 +93,7 @@ public class PlayerController : MonoBehaviour
             _animator.SetTrigger("Attack");
 
             // get if there are any trees in the attack range
-            Collider2D[] colliders = Physics2D.OverlapCircleAll(characterBody.position, 6.0f);
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(characterBody.position, 8.0f);
             print("caharacterBody.position " + characterBody.position);
             print("colliders " + colliders.Length);
             foreach (Collider2D collider in colliders)
@@ -102,6 +103,16 @@ public class PlayerController : MonoBehaviour
                 {
                     TreeScript tree = collider.gameObject.GetComponent<TreeScript>();
                     tree.GetAttacked();
+                }
+                if (collider.gameObject.tag == "Glacier")
+                {
+                    Glacier glacier = collider.gameObject.GetComponent<Glacier>();
+                    glacier.GetAttacked();
+                }
+                if (collider.gameObject.tag == "Ghost")
+                {
+                    GhostScript ghost = collider.gameObject.GetComponent<GhostScript>();
+                    ghost.GetAttacked();
                 }
             }
         }
@@ -150,12 +161,12 @@ public class PlayerController : MonoBehaviour
 
 
         _speed = Vector2.ClampMagnitude(_speed, _maxSpeed);
-        // characterBody.velocity = _speed;
-        characterBody.position += _speed * Time.fixedDeltaTime;
+        characterBody.velocity = _speed;
+        // characterBody.position += _speed * Time.fixedDeltaTime;
 
-        float clampedX = Mathf.Clamp(characterBody.position.x, minX, maxX);
-        float clampedY = Mathf.Clamp(characterBody.position.y, minY, maxY);
-        Vector3 clampedPosition = new Vector3(clampedX, clampedY, _cam.transform.position.z);
-        _cam.transform.position = clampedPosition;
+        // float clampedX = Mathf.Clamp(characterBody.position.x, minX, maxX);
+        // float clampedY = Mathf.Clamp(characterBody.position.y, minY, maxY);
+        // Vector3 clampedPosition = new Vector3(clampedX, clampedY, _cam.transform.position.z);
+        // _cam.velocity = _speed;
     }
 }
