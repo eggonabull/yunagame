@@ -144,6 +144,11 @@ public class GhostScript : MonoBehaviour
 
     public void GetAttacked()
     {
+        if (health <= 0)
+        {
+            return;
+        }
+
         health -= 1;
         animator.SetTrigger("Hit");
     }
