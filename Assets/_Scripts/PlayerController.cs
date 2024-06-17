@@ -1,10 +1,7 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Security.Cryptography;
 using UnityEngine;
 using SuperTiled2Unity;
-using UnityEngine.U2D.Animation;
+using UnityEngine.Tilemaps;
 
 public class PlayerController : MonoBehaviour
 {
@@ -12,6 +9,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Camera _cam;
     [SerializeField] private Rigidbody2D characterBody;
     [SerializeField] private SuperMap background;
+
+    [Header("Footsteps")]
+    public List<AudioClip> beachFootsteps;
+    public List<AudioClip> grassFootsteps;
+    public List<AudioClip> stoneFootsteps;
+
+    [SerializeField] AudioSource footstepAudioSource;
 
     private float _acceleration = 8.0f;
     private float _deceleration = 12.0f;
@@ -168,5 +172,79 @@ public class PlayerController : MonoBehaviour
         // float clampedY = Mathf.Clamp(characterBody.position.y, minY, maxY);
         // Vector3 clampedPosition = new Vector3(clampedX, clampedY, _cam.transform.position.z);
         // _cam.velocity = _speed;
+    }
+
+    
+    string GetMaterial() {
+        var tileMaps = FindObjectsOfType<Tilemap>();
+        int i = 0;
+        bool any_sand = false;
+        bool any_grass = false;
+        bool any_stone = false;
+        foreach ( var tm in tileMaps )
+        {
+            Vector3Int cellPosition = tm.WorldToCell(transform.position);
+            cellPosition.z = 0; // Z plan of tiles, might vary for you.
+            var superTile = tm.GetTile<SuperTile>(cellPosition);
+            if (superTile != null)
+            {
+                if (superTile.name.Contains("Sand"))
+                {
+                    any_sand = true;
+                }
+                else if (superTile.name.Contains("Grass"))
+                {
+                    any_grass = true;
+                }
+                else if (superTile.name.Contains("Stone"))
+                {
+                    any_stone = true;
+                }
+            }
+            i++;
+        }
+
+        if (any_stone)
+        {
+            return "Stone";
+        }
+        else if (any_grass)
+        {
+            return "Grass";
+        }
+        else if (any_sand)
+        {
+            return "Beach";
+        }
+        return "Unknown";
+    }
+
+    void PlayFootstep()
+    {
+        AudioClip clip = null;
+        string material = GetMaterial();
+        print ("Material: " + material);
+        if (material == "Beach")
+        {
+            clip = beachFootsteps[Random.Range(0, beachFootsteps.Count)];
+        }
+        else if (material == "Grass")
+        {
+            clip = grassFootsteps[Random.Range(0, grassFootsteps.Count)];
+        }
+        else if (material == "Stone")
+        {
+            clip = stoneFootsteps[Random.Range(0, stoneFootsteps.Count)];
+        }
+        
+        if (clip == null)
+        {
+            return;
+        }
+        
+        footstepAudioSource.clip = clip;
+        footstepAudioSource.volume = Random.Range(0.8f, 1f);
+        footstepAudioSource.pitch = Random.Range(0.8f, 1.1f);
+        footstepAudioSource.Play();
     }
 }
