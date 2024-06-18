@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Rigidbody2D characterBody;
     [SerializeField] private SuperMap background;
 
+    [SerializeField] private WillHealth willHealth;
+
     [Header("Footsteps")]
     public List<AudioClip> beachFootsteps;
     public List<AudioClip> grassFootsteps;
@@ -24,6 +26,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 _speed = Vector2.zero;
     private bool isAttacking = false;
 
+    private int maxHealth = 100;
     private int health = 100;
 
     float minX;
@@ -131,7 +134,8 @@ public class PlayerController : MonoBehaviour
         _speed = _speed + velocity * 2f;
         _animator.SetTrigger("Hit");
         print("TakeDamage " + damage);
-        health -= 35;
+        health -= damage;
+        willHealth.SetHealth(maxHealth, health);
         if (health <= 0)
         {
             _animator.SetBool("Walk", false);
