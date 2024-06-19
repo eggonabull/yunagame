@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/001 Title Screen.unity
+    path: Assets/Scenes/001 Title Screen - Copy.unity
     guid: 226199e7e73076ae3b05fca9f7d7c78c
   - enabled: 1
     path: Assets/Scenes/100 Intro.unity
