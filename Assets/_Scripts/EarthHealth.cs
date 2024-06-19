@@ -19,7 +19,13 @@ public class EarthHealth : MonoBehaviour
     public void DecreaseHealth(int amount)
     {
         currentHealth -= amount;
+        if (currentHealth <= 0)
+        {
+            currentHealth = 0;
+        }
+        float width = healthIndicator.GetComponent<RectTransform>().rect.width;
         healthIndicator.transform.localScale = new Vector3((float)currentHealth / totalHealth, 1, 1);
-        //healthIndicator.transform.localPosition = new Vector3((1 - (float)currentHealth / totalHealth) / 2, 0, 0);
+        float newWidth = width * (float)currentHealth / totalHealth;
+        healthIndicator.transform.localPosition = new Vector3(-46 + (width - newWidth) / 2, -18, 0);
     }
 }
