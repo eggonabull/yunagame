@@ -5,18 +5,22 @@ using UnityEngine;
 
 public class CrabEnemy : MonoBehaviour
 {
-    private int health = 100;
+    private int health = 5;
     private Strategy strategy = Strategy.Wait;
-    [SerializeField] public Transform player;
+    [SerializeField] public Rigidbody2D player;
     public Rigidbody2D self;
     private Animator _animator;
 
     private float CHASE_UPPER_BOUND = 85;
-    private float ATTACK_UPPER_BOUND = 15;
-    private float TIME_BETWEEN_ATTACKS = 10f / 12f;
+    private float ATTACK_UPPER_BOUND = 8;
+    private float TIME_BETWEEN_ATTACKS = 2;
     private float time_since_last_attack = 0;
 
+    private int anticipationsNeeded = 0;
+
     private static float CHASE_SPEED = 26;
+
+    private int ATTACK_OFFSET_DISTANCE = 3;
 
     // Start is called before the first frame update
     void Start()
@@ -35,7 +39,6 @@ public class CrabEnemy : MonoBehaviour
 
         if (health <= 0)
         {
-            Destroy(gameObject);
             return;
         }
 
@@ -46,7 +49,7 @@ public class CrabEnemy : MonoBehaviour
         if (distanceToPlayer > CHASE_UPPER_BOUND)
         {
             strategy = Strategy.Wait;
-            _animator.SetBool("isAttacking", false);
+            _animator.SetBool("isAnticipating", false);
             _animator.SetFloat("speed", 0f);
             return;
         }
@@ -54,22 +57,31 @@ public class CrabEnemy : MonoBehaviour
         Vector2 target_position = getTargetPosition();
         float distanceToTarget = Vector2.Distance(target_position, self.position);
 
-        if (distanceToTarget > 2)
+        if (time_since_last_attack < TIME_BETWEEN_ATTACKS)
         {
-            strategy = Strategy.Chase;
-            lookAtPlayer();
-            self.position = Vector2.MoveTowards(self.position, target_position, CHASE_SPEED * Time.deltaTime);
-            _animator.SetBool("isAttacking", false);
+            strategy = Strategy.Run;
+            lookAwayFromPlayer();
+            self.position = Vector2.MoveTowards(self.position, target_position, -CHASE_SPEED * Time.deltaTime);
+            _animator.SetBool("isAnticipating", false);
             _animator.SetFloat("speed", 1f);
         }
         else if (canAttack())
         {
             strategy = Strategy.Attack;
-            enterAttack();
+            startAnticipatingAttack();
         }
-        else {
+        else if (distanceToTarget > ATTACK_OFFSET_DISTANCE + 1)
+        {
+            strategy = Strategy.Chase;
+            lookAtPlayer();
+            self.position = Vector2.MoveTowards(self.position, target_position, CHASE_SPEED * Time.deltaTime);
+            _animator.SetBool("isAnticipating", false);
+            _animator.SetFloat("speed", 1f);
+        }
+        else
+        {
             strategy = Strategy.Wait;
-            _animator.SetBool("isAttacking", false);
+            _animator.SetBool("isAnticipating", false);
             _animator.SetFloat("speed", 0f);
         }
     }
@@ -80,11 +92,11 @@ public class CrabEnemy : MonoBehaviour
         Vector2 target_position = new Vector2();
         if (player.position.x > self.position.x)
         {
-            target_position.x = player.position.x - 2;
+            target_position.x = player.position.x - ATTACK_OFFSET_DISTANCE;
         }
         else
         {
-            target_position.x = player.position.x + 2;
+            target_position.x = player.position.x + ATTACK_OFFSET_DISTANCE;
         }
         target_position.y = player.position.y;
         return target_position;
@@ -115,7 +127,7 @@ public class CrabEnemy : MonoBehaviour
         }
     }
 
-    
+
     bool canAttack()
     {
         float distanceToPlayer = Vector2.Distance(player.position, transform.position);
@@ -125,29 +137,80 @@ public class CrabEnemy : MonoBehaviour
         && time_since_last_attack >= TIME_BETWEEN_ATTACKS;
     }
 
+    void startAnticipatingAttack()
+    {
+        // start the anticipation animation
+        if (!_animator.GetBool("isAnticipating"))
+        {
+            anticipationsNeeded = 2;
+            _animator.SetBool("isAnticipating", true);
+            _animator.SetFloat("speed", 0f);
+        }
+    }
+
+    void finishAnticipation()
+    {
+        anticipationsNeeded -= 1;
+        if (anticipationsNeeded == 0)
+        {
+            enterAttack();
+        }
+    }
+
     void enterAttack()
     {
-        _animator.SetFloat("speed", 0f);
+        _animator.SetBool("isAnticipating", false);
         _animator.SetBool("isAttacking", true);
     }
+
 
     void fireProjectile()
     {
         Vector3 projectile_position = new Vector3(self.position.x, self.position.y - 1, 160); // or 160 for z
-        // GameObject projectile = Instantiate(_projectile, projectile_position, Quaternion.identity);
-        // projectile.GetComponent<TreeEnemyProjectile>().ignore_id = self.gameObject.GetInstanceID();
-        // Destroy(projectile, 5f);
-        // Vector2 direction = new Vector2(player.position.x - self.position.x, player.position.y - self.position.y);
-        // direction.Normalize();
-        // if (direction.x > 0)
-        // {
-        //     projectile.transform.localScale = new Vector3(-32, 32, 1);
-        // }
-        // else
-        // {
-        //     projectile.transform.localScale = new Vector3(32, 32, 1);
-        // }
-        // projectile.GetComponent<Rigidbody2D>().velocity = direction * 64;
-        // time_since_last_attack = 0;
+        float xdiff = Mathf.Abs(player.position.x - self.position.x);
+        float ydiff = Mathf.Abs(player.position.y - self.position.y);
+        if (xdiff < 10 && ydiff < 5)
+        {
+            Vector2 velocity = (player.position - self.position).normalized * 10000;
+            int damage = 29;
+            player.GetComponent<PlayerController>().TakeDamage(velocity, damage);
+        }
     }
+
+    void finishAttack()
+    {
+        _animator.SetBool("isAttacking", false);
+        time_since_last_attack = 0;
+    }
+
+    public void GetAttacked()
+    {
+        print("CrabEnemy GetAttacked " + _animator.GetBool("isHit"));
+        if (health <= 0)
+        {
+            return;
+        }
+        if (!_animator.GetBool("isHit"))
+        {
+            health -= 1;
+            _animator.SetBool("isHit", true);
+        }
+    }
+
+    void getAttacked_Complete()
+    {
+        print("CrabEnemy getAttacked_Complete " + health);
+        if (health <= 0)
+        {
+            _animator.SetBool("isDead", true);
+        }
+        _animator.SetBool("isHit", false);
+
+    }
+
+    void die_Complete()
+    {
+        Destroy(gameObject);
+    }
+
 }

@@ -18,12 +18,15 @@ public class TreeScript : MonoBehaviour
     // Start is called before the first frame update
     public void GetAttacked()
     {
-        health -= 1;
-        _animator.SetInteger("Health", health);
-
-        if (health <= 0)
+        if (health > 0)
         {
-            earthHealth.DecreaseHealth(1);
+            health -= 1;
+            _animator.SetInteger("Health", health);
+
+            if (health == 0)
+            {
+                earthHealth.DecreaseHealth(1);
+            }
         }
     }
 }

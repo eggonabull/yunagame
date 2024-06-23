@@ -23,7 +23,7 @@ public class TreeEnemy : MonoBehaviour
 
     private float CHASE_UPPER_BOUND = 85;
     private float ATTACK_UPPER_BOUND = 50;
-    private float RUN_UPPER_BOUND = 35;
+    private float RUN_UPPER_BOUND = 30;
     private float TIME_BETWEEN_ATTACKS = 10f / 12f;
     private float time_since_last_attack = 0;
 
@@ -62,7 +62,7 @@ public class TreeEnemy : MonoBehaviour
             return;
         }
 
-        if (distanceToPlayer <= RUN_UPPER_BOUND || (strategy == Strategy.Run && distanceToPlayer <= RUN_UPPER_BOUND + 3))
+        if (distanceToPlayer <= RUN_UPPER_BOUND || (strategy == Strategy.Run && distanceToPlayer <= RUN_UPPER_BOUND + 7))
         {
             _animator.SetBool("isAttacking", false);
             _animator.SetFloat("speed", 1f);
@@ -76,7 +76,7 @@ public class TreeEnemy : MonoBehaviour
         float distanceToTarget = Vector2.Distance(target_position, self.position);
 
 
-        if (distanceToTarget > 2)
+        if (distanceToTarget > 5)
         {
             strategy = Strategy.Chase;
             lookAtPlayer();
@@ -144,8 +144,19 @@ public class TreeEnemy : MonoBehaviour
         float y_distance = Mathf.Abs(player.position.y - self.position.y);
         return distanceToPlayer <= ATTACK_UPPER_BOUND
         && distanceToPlayer > RUN_UPPER_BOUND
-        && y_distance < 3
+        && y_distance < 5
         && time_since_last_attack >= TIME_BETWEEN_ATTACKS;
+    }
+
+    public void GetAttacked()
+    {
+        if (health <= 0)
+        {
+            return;
+        }
+
+        health -= 1;
+        _animator.SetBool("isHit", true);
     }
 
     void enterAttack()

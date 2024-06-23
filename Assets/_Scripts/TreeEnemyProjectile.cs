@@ -5,7 +5,7 @@ using UnityEngine;
 public class TreeEnemyProjectile : MonoBehaviour
 {
     private Rigidbody2D rb;
-    private int damage = 35;
+    private int damage = 19;
 
     // Ignore the collision with the object that has this id
     // This is set by the TreeEnemy script that spawns the projectile

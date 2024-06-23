@@ -101,11 +101,11 @@ public class PlayerController : MonoBehaviour
 
             // get if there are any trees in the attack range
             Collider2D[] colliders = Physics2D.OverlapCircleAll(characterBody.position, 8.0f);
-            print("caharacterBody.position " + characterBody.position);
-            print("colliders " + colliders.Length);
+            // print("caharacterBody.position " + characterBody.position);
+            // print("colliders " + colliders.Length);
             foreach (Collider2D collider in colliders)
             {
-                print("collider " + collider.gameObject.tag);
+                // print("collider " + collider.gameObject.tag);
                 if (collider.gameObject.tag == "Tree")
                 {
                     TreeScript tree = collider.gameObject.GetComponent<TreeScript>();
@@ -120,6 +120,11 @@ public class PlayerController : MonoBehaviour
                 {
                     GhostScript ghost = collider.gameObject.GetComponent<GhostScript>();
                     ghost.GetAttacked();
+                }
+                if (collider.gameObject.tag == "Crab")
+                {
+                    CrabEnemy crab = collider.gameObject.GetComponent<CrabEnemy>();
+                    crab.GetAttacked();
                 }
             }
         }
@@ -227,7 +232,7 @@ public class PlayerController : MonoBehaviour
     {
         AudioClip clip = null;
         string material = GetMaterial();
-        print ("Material: " + material);
+        // print ("Material: " + material);
         if (material == "Beach")
         {
             clip = beachFootsteps[Random.Range(0, beachFootsteps.Count)];

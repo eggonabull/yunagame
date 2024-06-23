@@ -12,7 +12,7 @@ public class TitleScreenCamera : MonoBehaviour
         AudioSource menuMusic = audioSources[1];
 
         double playTime = AudioSettings.dspTime + introHook.clip.samples / introHook.clip.frequency - 2.60d;
-        print("Current time: " + AudioSettings.dspTime + " Play time: " + playTime);
+        // print("Current time: " + AudioSettings.dspTime + " Play time: " + playTime);
         menuMusic.PlayScheduled(playTime);
     }
 
