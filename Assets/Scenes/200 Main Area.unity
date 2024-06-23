@@ -901,6 +901,15 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 425401efeb7cb4011936b5cdadfb8735, type: 3}
   - {fileID: 8300000, guid: c7a9ca77d64224ee19a1c7e52400db2b, type: 3}
   attackAudioSource: {fileID: 1374644190}
+  hitSounds:
+  - {fileID: 8300000, guid: 50ecad546dfeb4554b3e7db4093da455, type: 3}
+  - {fileID: 8300000, guid: a336f508799cc4a8a9f0e8ecc870ea52, type: 3}
+  - {fileID: 8300000, guid: 3f484a16270ba4982a65a3bde3ec163a, type: 3}
+  - {fileID: 8300000, guid: 68891ccb9430845eebb126d5e50baa71, type: 3}
+  - {fileID: 8300000, guid: 077eda4e4e6e24de9a9bdd6d4b2103fa, type: 3}
+  - {fileID: 8300000, guid: 135dee116b2bb401db50a26fa9652878, type: 3}
+  - {fileID: 8300000, guid: 332b26112a5bd4c1e8b6366ee02d3b44, type: 3}
+  - {fileID: 8300000, guid: 2672b2a7f13ed454a918abd62f534bab, type: 3}
 --- !u!1 &295571151
 GameObject:
   m_ObjectHideFlags: 0
@@ -2726,7 +2735,7 @@ Transform:
   m_GameObject: {fileID: 705311392}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 334.7, y: -965.9, z: 161}
+  m_LocalPosition: {x: 409.2, y: -1284.8, z: 161}
   m_LocalScale: {x: 32, y: 32, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3743,12 +3752,12 @@ PrefabInstance:
     - target: {fileID: 8778328951296605930, guid: 2d2185497e50c10eab91bdd0f8a80525,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 688.3
+      value: 432.8
       objectReference: {fileID: 0}
     - target: {fileID: 8778328951296605930, guid: 2d2185497e50c10eab91bdd0f8a80525,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1329.2
+      value: -1279
       objectReference: {fileID: 0}
     - target: {fileID: 8778328951296605930, guid: 2d2185497e50c10eab91bdd0f8a80525,
         type: 3}

@@ -23,6 +23,8 @@ public class PlayerController : MonoBehaviour
     public List<AudioClip> attackSounds;
     [SerializeField] AudioSource attackAudioSource;
 
+    public List <AudioClip> hitSounds;
+
     private float _acceleration = 8.0f;
     private float _deceleration = 12.0f;
     private float _maxSpeed = 50.0f;
@@ -112,6 +114,10 @@ public class PlayerController : MonoBehaviour
 
     public void Attack()
     {
+        if (health <= 0)
+        {
+            return;
+        }
         attackAudioSource.clip = attackSounds[Random.Range(0, attackSounds.Count)];
         attackAudioSource.Play();
         // get if there are any trees in the attack range
@@ -146,6 +152,13 @@ public class PlayerController : MonoBehaviour
 
     public void TakeDamage(Vector2 velocity, int damage)
     {
+        if (health <= 0)
+        {
+            return;
+        }
+        attackAudioSource.clip = hitSounds[Random.Range(0, hitSounds.Count)];
+        attackAudioSource.Play();
+
         _speed = _speed + velocity * 2f;
         _animator.SetTrigger("Hit");
         print("TakeDamage " + damage);
