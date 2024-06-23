@@ -19,6 +19,10 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] AudioSource footstepAudioSource;
 
+    [Header("Attack")]
+    public List<AudioClip> attackSounds;
+    [SerializeField] AudioSource attackAudioSource;
+
     private float _acceleration = 8.0f;
     private float _deceleration = 12.0f;
     private float _maxSpeed = 50.0f;
@@ -62,7 +66,7 @@ public class PlayerController : MonoBehaviour
         GatherInput();
 
         //characterBody.position += _speed * Time.fixedDeltaTime;
-        
+
         //_cam.transform.position = Vector3.MoveTowards(_cam.transform.position, clampedPosition, 1f);
     }
 
@@ -99,38 +103,44 @@ public class PlayerController : MonoBehaviour
         {
             _animator.SetTrigger("Attack");
 
-            // get if there are any trees in the attack range
-            Collider2D[] colliders = Physics2D.OverlapCircleAll(characterBody.position, 8.0f);
-            // print("caharacterBody.position " + characterBody.position);
-            // print("colliders " + colliders.Length);
-            foreach (Collider2D collider in colliders)
-            {
-                // print("collider " + collider.gameObject.tag);
-                if (collider.gameObject.tag == "Tree")
-                {
-                    TreeScript tree = collider.gameObject.GetComponent<TreeScript>();
-                    tree.GetAttacked();
-                }
-                if (collider.gameObject.tag == "Glacier")
-                {
-                    Glacier glacier = collider.gameObject.GetComponent<Glacier>();
-                    glacier.GetAttacked();
-                }
-                if (collider.gameObject.tag == "Ghost")
-                {
-                    GhostScript ghost = collider.gameObject.GetComponent<GhostScript>();
-                    ghost.GetAttacked();
-                }
-                if (collider.gameObject.tag == "Crab")
-                {
-                    CrabEnemy crab = collider.gameObject.GetComponent<CrabEnemy>();
-                    crab.GetAttacked();
-                }
-            }
         }
         else
         {
             _animator.ResetTrigger("Attack");
+        }
+    }
+
+    public void Attack()
+    {
+        attackAudioSource.clip = attackSounds[Random.Range(0, attackSounds.Count)];
+        attackAudioSource.Play();
+        // get if there are any trees in the attack range
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(characterBody.position, 8.0f);
+        // print("caharacterBody.position " + characterBody.position);
+        // print("colliders " + colliders.Length);
+        foreach (Collider2D collider in colliders)
+        {
+            // print("collider " + collider.gameObject.tag);
+            if (collider.gameObject.tag == "Tree")
+            {
+                TreeScript tree = collider.gameObject.GetComponent<TreeScript>();
+                tree.GetAttacked();
+            }
+            if (collider.gameObject.tag == "Glacier")
+            {
+                Glacier glacier = collider.gameObject.GetComponent<Glacier>();
+                glacier.GetAttacked();
+            }
+            if (collider.gameObject.tag == "Ghost")
+            {
+                GhostScript ghost = collider.gameObject.GetComponent<GhostScript>();
+                ghost.GetAttacked();
+            }
+            if (collider.gameObject.tag == "Crab")
+            {
+                CrabEnemy crab = collider.gameObject.GetComponent<CrabEnemy>();
+                crab.GetAttacked();
+            }
         }
     }
 
@@ -183,14 +193,15 @@ public class PlayerController : MonoBehaviour
         // _cam.velocity = _speed;
     }
 
-    
-    string GetMaterial() {
+
+    string GetMaterial()
+    {
         var tileMaps = FindObjectsOfType<Tilemap>();
         int i = 0;
         bool any_sand = false;
         bool any_grass = false;
         bool any_stone = false;
-        foreach ( var tm in tileMaps )
+        foreach (var tm in tileMaps)
         {
             Vector3Int cellPosition = tm.WorldToCell(transform.position);
             cellPosition.z = 0; // Z plan of tiles, might vary for you.
@@ -245,12 +256,12 @@ public class PlayerController : MonoBehaviour
         {
             clip = stoneFootsteps[Random.Range(0, stoneFootsteps.Count)];
         }
-        
+
         if (clip == null)
         {
             return;
         }
-        
+
         footstepAudioSource.clip = clip;
         footstepAudioSource.volume = Random.Range(0.8f, 1f);
         footstepAudioSource.pitch = Random.Range(0.8f, 1.1f);
