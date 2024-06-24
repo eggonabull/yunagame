@@ -8,6 +8,8 @@ TagManager:
   - Glacier
   - Ghost
   - Crab
+  - Barrel
+  - TreeEnemy
   layers:
   - Default
   - TransparentFX

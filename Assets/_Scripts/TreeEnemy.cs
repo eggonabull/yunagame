@@ -14,7 +14,7 @@ public enum Strategy
 
 public class TreeEnemy : MonoBehaviour
 {
-    private int health = 100;
+    private int health = 3;
     private Strategy strategy = Strategy.Wait;
     [SerializeField] public Transform player;
     [SerializeField] public Rigidbody2D self;
@@ -154,9 +154,22 @@ public class TreeEnemy : MonoBehaviour
         {
             return;
         }
+        if (_animator.GetBool("isHit"))
+        {
+            return;
+        }
 
         health -= 1;
         _animator.SetBool("isHit", true);
+    }
+
+    public void HitAnimationEnd()
+    {
+        _animator.SetBool("isHit", false);
+        if (health == 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
     void enterAttack()
