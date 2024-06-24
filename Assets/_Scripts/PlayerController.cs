@@ -147,6 +147,11 @@ public class PlayerController : MonoBehaviour
                 CrabEnemy crab = collider.gameObject.GetComponent<CrabEnemy>();
                 crab.GetAttacked();
             }
+            if (collider.gameObject.tag == "Barrel")
+            {
+                BarrelScript barrel = collider.gameObject.GetComponent<BarrelScript>();
+                barrel.GetAttacked();
+            }
         }
     }
 
