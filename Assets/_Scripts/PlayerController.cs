@@ -126,7 +126,7 @@ public class PlayerController : MonoBehaviour
         // print("colliders " + colliders.Length);
         foreach (Collider2D collider in colliders)
         {
-            // print("collider " + collider.gameObject.tag);
+            // Objects
             if (collider.gameObject.tag == "Tree")
             {
                 TreeScript tree = collider.gameObject.GetComponent<TreeScript>();
@@ -137,6 +137,14 @@ public class PlayerController : MonoBehaviour
                 Glacier glacier = collider.gameObject.GetComponent<Glacier>();
                 glacier.GetAttacked();
             }
+            if (collider.gameObject.tag == "Barrel")
+            {
+                BarrelScript barrel = collider.gameObject.GetComponent<BarrelScript>();
+                barrel.GetAttacked();
+            }
+
+
+            // Enemies
             if (collider.gameObject.tag == "Ghost")
             {
                 GhostScript ghost = collider.gameObject.GetComponent<GhostScript>();
@@ -146,6 +154,11 @@ public class PlayerController : MonoBehaviour
             {
                 CrabEnemy crab = collider.gameObject.GetComponent<CrabEnemy>();
                 crab.GetAttacked();
+            }
+            if (collider.gameObject.tag == "TreeEnemy")
+            {
+                TreeEnemy treeEnemy = collider.gameObject.GetComponent<TreeEnemy>();
+                treeEnemy.GetAttacked();
             }
         }
     }
