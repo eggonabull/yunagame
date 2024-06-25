@@ -7,6 +7,7 @@ public class BarrelScript : MonoBehaviour
     Animator _animator;
     int health = 1;
     [SerializeField] public EarthHealth earthHealth;
+    [SerializeField] public CrabEnemy crabEnemy;
 
     // Start is called before the first frame update
     void Start()
@@ -26,6 +27,9 @@ public class BarrelScript : MonoBehaviour
             {
                 _animator.SetBool("isSpilled", true);
                 earthHealth.DecreaseHealth(1);
+
+                // Spawn a crab enemy
+                Instantiate(crabEnemy, transform.position, Quaternion.identity);
             }
         }
     }

@@ -7,6 +7,7 @@ public class Glacier : MonoBehaviour
     
     int health = 4;
     [SerializeField] public EarthHealth earthHealth;
+    [SerializeField] public GhostScript ghostEnemy;
     Animator animator;
 
     
@@ -29,6 +30,9 @@ public class Glacier : MonoBehaviour
         if (health == 0)
         {
             earthHealth.DecreaseHealth(1);
+
+            // Spawn a ghost enemy
+            Instantiate(ghostEnemy, transform.position, Quaternion.identity);
         }
     }
 }

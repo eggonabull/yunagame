@@ -46,7 +46,6 @@ public class TreeEnemy : MonoBehaviour
 
         if (health <= 0)
         {
-            Destroy(gameObject);
             return;
         }
 

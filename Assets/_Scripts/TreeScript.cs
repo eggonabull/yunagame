@@ -7,6 +7,7 @@ public class TreeScript : MonoBehaviour
     Animator _animator;
     int health = 3;
     [SerializeField] public EarthHealth earthHealth;
+    [SerializeField] public TreeEnemy treeEnemy;
 
     public void Start()
     {
@@ -26,6 +27,10 @@ public class TreeScript : MonoBehaviour
             if (health == 0)
             {
                 earthHealth.DecreaseHealth(1);
+
+                // Spawn a tree enemy
+                Instantiate(treeEnemy, transform.position, Quaternion.identity);
+
             }
         }
     }

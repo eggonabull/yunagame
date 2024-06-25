@@ -14,7 +14,7 @@ public class CrabEnemy : MonoBehaviour
     private float CHASE_UPPER_BOUND = 85;
     private float ATTACK_UPPER_BOUND = 8;
     private float TIME_BETWEEN_ATTACKS = 2;
-    private float time_since_last_attack = 0;
+    private float time_since_last_attack = 3;
 
     private int anticipationsNeeded = 0;
 
