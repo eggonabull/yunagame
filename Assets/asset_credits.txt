@@ -2,7 +2,7 @@ Beach Decor: @schwarnhild schwarnhild.itch.io/ https://schwarnhild.itch.io/basic
 Enemies/Tiles:  This asset pack can be used in both free and commercial projects. You can modify it to suit your own needs. Credit is not needed but appreciated.  You may not redistribute it or resell it.
 Tiny World - Easy Character: Sour Taste | Single Entity | Standard Unity Asset Store EULA
 Pixel Frog | Pixel Adventure 2 | CC0
-Pixel Frox | Treasure Hunters | Public Domain
-Sprout Lands: Premium License | No redistribution, commercial projects ok, no NFTs https://twitter.com/Sprout_Lands
+Pixel Frog | Treasure Hunters | Public Domain
+Cup Nooble - Sprout Lands: Premium License | No redistribution, commercial projects ok, no NFTs https://twitter.com/Sprout_Lands
 
 Needed: butterfly sprite license
