@@ -8,6 +8,9 @@ public class Glacier : MonoBehaviour
     int health = 4;
     [SerializeField] public EarthHealth earthHealth;
     [SerializeField] public GhostScript ghostEnemy;
+
+    public List<AudioClip> takeDamageSounds;
+    AudioSource takeDamageAudioSource;
     Animator animator;
 
     
@@ -16,6 +19,7 @@ public class Glacier : MonoBehaviour
     {        
         earthHealth.IncreaseHealth(1);
         animator = GetComponent<Animator>();
+        takeDamageAudioSource = GetComponent<AudioSource>();
 
     }
 
@@ -23,9 +27,15 @@ public class Glacier : MonoBehaviour
 
     public void GetAttacked()
     {
+        if (health > 0)
+        {
+            int randomIndex = Random.Range(0, takeDamageSounds.Count);
+            takeDamageAudioSource.clip = takeDamageSounds[randomIndex];
+            takeDamageAudioSource.Play();
+        }
+
         health -= 1;
         animator.SetInteger("health", health);
-        
 
         if (health == 0)
         {

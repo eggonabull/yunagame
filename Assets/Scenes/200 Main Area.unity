@@ -2458,6 +2458,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   earthHealth: {fileID: 1895422926}
   ghostEnemy: {fileID: 113967384}
+  takeDamageSounds:
+  - {fileID: 8300000, guid: 5a69401065656d1b0af87b43b19e11a4, type: 3}
+  - {fileID: 8300000, guid: 24fe58f620062ec61bc24a4ef8858312, type: 3}
+  - {fileID: 8300000, guid: 51c57816752ca1e1180aa1bddc765083, type: 3}
+  - {fileID: 8300000, guid: c23f933666d89fba0ba2de5afca05c6b, type: 3}
+  - {fileID: 8300000, guid: 8af29ca1a230c3d779e1841b309e54f2, type: 3}
 --- !u!61 &578934459
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5660,6 +5666,7 @@ GameObject:
   - component: {fileID: 1397585216}
   - component: {fileID: 1397585215}
   - component: {fileID: 1397585214}
+  - component: {fileID: 1397585219}
   m_Layer: 0
   m_Name: glacier_0 (1)
   m_TagString: Glacier
@@ -5726,6 +5733,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   earthHealth: {fileID: 1895422926}
   ghostEnemy: {fileID: 113967384}
+  takeDamageSounds:
+  - {fileID: 8300000, guid: 5a69401065656d1b0af87b43b19e11a4, type: 3}
+  - {fileID: 8300000, guid: 24fe58f620062ec61bc24a4ef8858312, type: 3}
+  - {fileID: 8300000, guid: 51c57816752ca1e1180aa1bddc765083, type: 3}
+  - {fileID: 8300000, guid: c23f933666d89fba0ba2de5afca05c6b, type: 3}
+  - {fileID: 8300000, guid: 8af29ca1a230c3d779e1841b309e54f2, type: 3}
 --- !u!95 &1397585216
 Animator:
   serializedVersion: 5
@@ -5814,6 +5827,102 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1987718722}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &1397585219
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1397585213}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1459758968
 GameObject:
   m_ObjectHideFlags: 0
@@ -8167,6 +8276,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   earthHealth: {fileID: 1895422926}
   ghostEnemy: {fileID: 113967384}
+  takeDamageSounds:
+  - {fileID: 8300000, guid: 5a69401065656d1b0af87b43b19e11a4, type: 3}
+  - {fileID: 8300000, guid: 24fe58f620062ec61bc24a4ef8858312, type: 3}
+  - {fileID: 8300000, guid: 51c57816752ca1e1180aa1bddc765083, type: 3}
+  - {fileID: 8300000, guid: c23f933666d89fba0ba2de5afca05c6b, type: 3}
+  - {fileID: 8300000, guid: 8af29ca1a230c3d779e1841b309e54f2, type: 3}
 --- !u!95 &1955998413
 Animator:
   serializedVersion: 5
@@ -9121,6 +9236,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   earthHealth: {fileID: 1895422926}
   ghostEnemy: {fileID: 113967384}
+  takeDamageSounds:
+  - {fileID: 8300000, guid: 5a69401065656d1b0af87b43b19e11a4, type: 3}
+  - {fileID: 8300000, guid: 24fe58f620062ec61bc24a4ef8858312, type: 3}
+  - {fileID: 8300000, guid: 51c57816752ca1e1180aa1bddc765083, type: 3}
+  - {fileID: 8300000, guid: c23f933666d89fba0ba2de5afca05c6b, type: 3}
+  - {fileID: 8300000, guid: 8af29ca1a230c3d779e1841b309e54f2, type: 3}
 --- !u!95 &2053298538
 Animator:
   serializedVersion: 5
@@ -9456,6 +9577,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   earthHealth: {fileID: 1895422926}
   ghostEnemy: {fileID: 113967384}
+  takeDamageSounds:
+  - {fileID: 8300000, guid: 5a69401065656d1b0af87b43b19e11a4, type: 3}
+  - {fileID: 8300000, guid: 24fe58f620062ec61bc24a4ef8858312, type: 3}
+  - {fileID: 8300000, guid: 51c57816752ca1e1180aa1bddc765083, type: 3}
+  - {fileID: 8300000, guid: c23f933666d89fba0ba2de5afca05c6b, type: 3}
+  - {fileID: 8300000, guid: 8af29ca1a230c3d779e1841b309e54f2, type: 3}
 --- !u!95 &2122804677
 Animator:
   serializedVersion: 5
