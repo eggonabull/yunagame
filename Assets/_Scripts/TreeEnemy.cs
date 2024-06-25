@@ -27,7 +27,7 @@ public class TreeEnemy : MonoBehaviour
     private float TIME_BETWEEN_ATTACKS = 10f / 12f;
     private float time_since_last_attack = 0;
 
-    private static float CHASE_SPEED = 18;
+    private static float CHASE_SPEED = 12;
     private static float RUN_SPEED = CHASE_SPEED * 1.5f;
 
     public List<AudioClip> takeDamageSounds;
