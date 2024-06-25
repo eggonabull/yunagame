@@ -31,6 +31,9 @@ public class PlayerController : MonoBehaviour
     private Vector2 _input = Vector2.zero;
     private Vector2 _speed = Vector2.zero;
     private bool isAttacking = false;
+    private bool journalToggle = false;
+
+    [SerializeField] private GameObject journal;
 
     private int maxHealth = 100;
     private int health = 100;
@@ -53,6 +56,7 @@ public class PlayerController : MonoBehaviour
         minY = background.transform.position.y - backgroundHeight + _cam.orthographicSize + buffer;
         maxY = background.transform.position.y - _cam.orthographicSize - buffer;
         _cam.transform.position = new Vector3(characterBody.position.x, characterBody.position.y, _cam.transform.position.z);
+        journal.SetActive(false);
     }
 
     void GatherInput()
@@ -60,6 +64,7 @@ public class PlayerController : MonoBehaviour
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
         isAttacking = Input.GetButtonDown("Fire1");
+        journalToggle = Input.GetKeyDown(KeyCode.J);
         _input = new Vector2(horizontal, vertical);
     }
 
@@ -109,6 +114,10 @@ public class PlayerController : MonoBehaviour
         else
         {
             _animator.ResetTrigger("Attack");
+        }
+        if (journalToggle)
+        {
+            journal.SetActive(!journal.activeSelf);
         }
     }
 
