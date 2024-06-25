@@ -30,6 +30,9 @@ public class TreeEnemy : MonoBehaviour
     private static float CHASE_SPEED = 18;
     private static float RUN_SPEED = CHASE_SPEED * 1.5f;
 
+    public List<AudioClip> takeDamageSounds;
+    AudioSource takeDamageAudioSource;
+
     // Start is called before the first frame update
     void Start()
     {

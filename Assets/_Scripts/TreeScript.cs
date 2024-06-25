@@ -9,11 +9,15 @@ public class TreeScript : MonoBehaviour
     [SerializeField] public EarthHealth earthHealth;
     [SerializeField] public TreeEnemy treeEnemy;
 
+    public List<AudioClip> takeDamageSounds;
+    AudioSource takeDamageAudioSource;
+
     public void Start()
     {
         _animator = GetComponent<Animator>();
 
         earthHealth.IncreaseHealth(1);
+        takeDamageAudioSource = GetComponent<AudioSource>();
     }
 
     // Start is called before the first frame update
@@ -23,6 +27,11 @@ public class TreeScript : MonoBehaviour
         {
             health -= 1;
             _animator.SetInteger("Health", health);
+
+            // play a random take damage sound
+            int randomIndex = Random.Range(0, takeDamageSounds.Count);
+            takeDamageAudioSource.clip = takeDamageSounds[randomIndex];
+            takeDamageAudioSource.Play();
 
             if (health == 0)
             {
