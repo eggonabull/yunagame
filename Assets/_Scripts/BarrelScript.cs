@@ -13,7 +13,7 @@ public class BarrelScript : MonoBehaviour
     void Start()
     {
         _animator = GetComponent<Animator>();
-        earthHealth.IncreaseHealth(1);
+        earthHealth.IncreaseHealth(10);
     }
 
     // Start is called before the first frame update
@@ -26,7 +26,7 @@ public class BarrelScript : MonoBehaviour
             if (health == 0)
             {
                 _animator.SetBool("isSpilled", true);
-                earthHealth.DecreaseHealth(1);
+                earthHealth.DecreaseHealth(12);
 
                 // Spawn a crab enemy
                 Instantiate(crabEnemy, transform.position, Quaternion.identity);

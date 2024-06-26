@@ -17,7 +17,7 @@ public class Glacier : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {        
-        earthHealth.IncreaseHealth(1);
+        earthHealth.IncreaseHealth(10);
         animator = GetComponent<Animator>();
         takeDamageAudioSource = GetComponent<AudioSource>();
 
@@ -39,7 +39,7 @@ public class Glacier : MonoBehaviour
 
         if (health == 0)
         {
-            earthHealth.DecreaseHealth(1);
+            earthHealth.DecreaseHealth(12);
 
             // Spawn a ghost enemy
             Instantiate(ghostEnemy, transform.position, Quaternion.identity);

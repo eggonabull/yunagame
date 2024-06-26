@@ -16,7 +16,7 @@ public class TreeScript : MonoBehaviour
     {
         _animator = GetComponent<Animator>();
 
-        earthHealth.IncreaseHealth(1);
+        earthHealth.IncreaseHealth(10);
         takeDamageAudioSource = GetComponent<AudioSource>();
     }
 
@@ -36,7 +36,7 @@ public class TreeScript : MonoBehaviour
 
             if (health == 0)
             {
-                earthHealth.DecreaseHealth(1);
+                earthHealth.DecreaseHealth(12);
 
                 // Spawn a tree enemy
                 Instantiate(treeEnemy, transform.position, Quaternion.identity);

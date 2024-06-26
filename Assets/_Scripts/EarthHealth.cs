@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EarthHealth : MonoBehaviour
 {
@@ -22,6 +23,7 @@ public class EarthHealth : MonoBehaviour
         if (currentHealth <= 0)
         {
             currentHealth = 0;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
         float width = healthIndicator.GetComponent<RectTransform>().rect.width;
         healthIndicator.transform.localScale = new Vector3((float)currentHealth / totalHealth, 1, 1);
