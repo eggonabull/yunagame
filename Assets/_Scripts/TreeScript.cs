@@ -29,7 +29,8 @@ public class TreeScript : MonoBehaviour
             _animator.SetInteger("Health", health);
 
             // play a random take damage sound
-            int randomIndex = Random.Range(0, takeDamageSounds.Count);
+            int randomIndex = Random.Range(0, takeDamageSounds.Count * 2 - 1);
+            randomIndex = randomIndex % takeDamageSounds.Count;
             takeDamageAudioSource.clip = takeDamageSounds[randomIndex];
             takeDamageAudioSource.Play();
 
