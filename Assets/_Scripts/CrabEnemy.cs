@@ -16,6 +16,7 @@ public class CrabEnemy : MonoBehaviour
     private float TIME_BETWEEN_ATTACKS = 2;
     private float time_since_last_attack = 3;
 
+    private int damage = 19;
     private int anticipationsNeeded = 0;
 
     private static float CHASE_SPEED = 26;
@@ -172,7 +173,6 @@ public class CrabEnemy : MonoBehaviour
         if (xdiff < 10 && ydiff < 5)
         {
             Vector2 velocity = (player.position - self.position).normalized * 10000;
-            int damage = 29;
             player.GetComponent<PlayerController>().TakeDamage(velocity, damage);
         }
     }
