@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using SuperTiled2Unity;
 using UnityEngine.Tilemaps;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -35,6 +36,9 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private GameObject journal;
 
+    public AudioClip deathSound;
+    [SerializeField] private GameObject gameOver;
+
     private int maxHealth = 100;
     private int health = 100;
 
@@ -57,6 +61,7 @@ public class PlayerController : MonoBehaviour
         maxY = background.transform.position.y - _cam.orthographicSize - buffer;
         _cam.transform.position = new Vector3(characterBody.position.x, characterBody.position.y, _cam.transform.position.z);
         journal.SetActive(false);
+        gameOver.SetActive(false);
     }
 
     void GatherInput()
@@ -66,6 +71,11 @@ public class PlayerController : MonoBehaviour
         isAttacking = Input.GetButtonDown("Fire1");
         journalToggle = Input.GetKeyDown(KeyCode.J);
         _input = new Vector2(horizontal, vertical);
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
     }
 
     void Update()
@@ -188,6 +198,9 @@ public class PlayerController : MonoBehaviour
         willHealth.SetHealth(maxHealth, health);
         if (health <= 0)
         {
+            attackAudioSource.clip = deathSound;
+            attackAudioSource.Play();
+            gameOver.SetActive(true);
             _animator.SetBool("Walk", false);
             _animator.SetBool("Death", true);
         }
