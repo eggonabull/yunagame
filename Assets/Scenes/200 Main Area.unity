@@ -1629,6 +1629,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: e9dda99bf6b6e416d932c2bcd6261740, type: 3}
   - {fileID: 8300000, guid: 425401efeb7cb4011936b5cdadfb8735, type: 3}
   - {fileID: 8300000, guid: c7a9ca77d64224ee19a1c7e52400db2b, type: 3}
+  - {fileID: 8300000, guid: ff61addc7b404486b83c80296902482e, type: 3}
   attackAudioSource: {fileID: 1374644190}
   hitSounds:
   - {fileID: 8300000, guid: 50ecad546dfeb4554b3e7db4093da455, type: 3}
@@ -1639,6 +1640,13 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 135dee116b2bb401db50a26fa9652878, type: 3}
   - {fileID: 8300000, guid: 332b26112a5bd4c1e8b6366ee02d3b44, type: 3}
   - {fileID: 8300000, guid: 2672b2a7f13ed454a918abd62f534bab, type: 3}
+  - {fileID: 8300000, guid: ac47fb702f0e240dd9e695c8dc0269c5, type: 3}
+  - {fileID: 8300000, guid: d7ad8b8fb9fe24c00b00323619a86895, type: 3}
+  - {fileID: 8300000, guid: f087226728a54439db51c097c3a10473, type: 3}
+  - {fileID: 8300000, guid: b048fc2cbd93b4d0488e17cac342e5ba, type: 3}
+  - {fileID: 8300000, guid: 20dc96346ed9d4974abd0852e69011c9, type: 3}
+  - {fileID: 8300000, guid: c6f497f11cf7249ccb6c5b2d4d87ce51, type: 3}
+  - {fileID: 8300000, guid: a83b48838eaee4389851f7f5dfb9dc3a, type: 3}
   journal: {fileID: 2140846672}
 --- !u!1 &324901582
 GameObject:
